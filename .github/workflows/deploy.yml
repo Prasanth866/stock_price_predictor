@@ -1,0 +1,21 @@
+name: Deploy to Hostinger VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: 31.97.116.211
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: /root/Prophet-Forecasting-For-Portfolio-Optimisation/scripts/deploy.sh
